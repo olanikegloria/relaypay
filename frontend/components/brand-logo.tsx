@@ -1,12 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-/** Bundler-resolved URL (relative import), not a site-root path — works on any host/base path. */
-import logoFile from '../public/placeholder-logo.svg'
+/** Static import (Next.js): resolved at build time; works with any `basePath` / host. */
+import logoFile from '../public/relaypay-logo.svg'
 
-/** SVG intrinsic size from placeholder-logo.svg */
-const LOGO_W = 215
-const LOGO_H = 48
+/** Intrinsic size from `public/relaypay-logo.svg` (`width` / `height` on root `<svg>`). */
+const LOGO_W = 687
+const LOGO_H = 176
 
 const VARIANT = {
   compact: {
