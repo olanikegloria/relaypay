@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
-/** Relative import — bundled URL; replaces missing /icon-*.png and /apple-icon.png in public/. */
-import appIcon from '../public/icon.svg'
+/** RelayPay brand mark for tab + “Add to Home Screen” (bundled URL, not the generic Next/Vercel icon). */
+import appIcon from '../public/relaypay-logo.svg'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
