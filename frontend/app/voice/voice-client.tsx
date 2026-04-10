@@ -386,6 +386,12 @@ export function VoiceClient({ accountPrefill }: Props) {
 
   const handleSubmitGuestForm = async (e: React.FormEvent) => {
     e.preventDefault()
+    const trimmedEmail = customerEmail.trim()
+    if (!trimmedEmail) {
+      setBackendError('Please enter your email address.')
+      return
+    }
+    setBackendError(null)
     await runPreCall(customerName, customerEmail)
   }
 
@@ -505,7 +511,7 @@ export function VoiceClient({ accountPrefill }: Props) {
               />
             </div>
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-foreground">Email (optional)</label>
+              <label className="block text-sm font-medium text-foreground">Email</label>
               <Input
                 type="email"
                 value={customerEmail}
@@ -513,6 +519,7 @@ export function VoiceClient({ accountPrefill }: Props) {
                 placeholder="you@company.com"
                 className="border-border bg-background"
                 autoComplete="email"
+                required
               />
             </div>
             <p className="text-sm leading-relaxed text-muted-foreground">
