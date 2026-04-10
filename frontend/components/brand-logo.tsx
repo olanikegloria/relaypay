@@ -1,28 +1,32 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
+/** Bundler-resolved URL (relative import), not a site-root path — works on any host/base path. */
+import logoFile from '../public/placeholder-logo.svg'
 
-const LOGO_SRC = '/relaypay-logo.png'
+/** SVG intrinsic size from placeholder-logo.svg */
+const LOGO_W = 215
+const LOGO_H = 48
 
 const VARIANT = {
   compact: {
-    width: 180,
-    height: 64,
+    width: LOGO_W,
+    height: LOGO_H,
     className: 'h-7 sm:h-8 w-auto scale-[1.18] sm:scale-[1.28] origin-left',
   },
   nav: {
-    width: 220,
-    height: 78,
+    width: LOGO_W,
+    height: LOGO_H,
     className: 'h-9 sm:h-10 w-auto scale-[1.2] sm:scale-[1.32] origin-left',
   },
   hero: {
-    width: 420,
-    height: 150,
+    width: LOGO_W,
+    height: LOGO_H,
     className: 'h-[4.25rem] sm:h-[5.5rem] md:h-[6.25rem] w-auto max-w-[min(92vw,22rem)] scale-[1.12] sm:scale-[1.22]',
   },
   auth: {
-    width: 240,
-    height: 86,
+    width: LOGO_W,
+    height: LOGO_H,
     className: 'h-12 sm:h-14 w-auto scale-110',
   },
 } as const
@@ -48,7 +52,7 @@ export function BrandLogo({
   const v = VARIANT[variant]
   const img = (
     <Image
-      src={LOGO_SRC}
+      src={logoFile}
       alt="RelayPay"
       width={v.width}
       height={v.height}

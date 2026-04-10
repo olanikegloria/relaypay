@@ -1,26 +1,31 @@
 import Link from 'next/link'
+import type { User } from '@supabase/supabase-js'
 import { Button } from '@/components/ui/button'
-import { createClient } from '@/lib/supabase/server'
+import { createClient, isSupabaseConfigured } from '@/lib/supabase/server'
 import { LogoutButton } from '@/components/logout-button'
 import { BrandLogo } from '@/components/brand-logo'
 import { Headphones, LayoutDashboard, MessageSquare, Shield, Sparkles } from 'lucide-react'
 
 export default async function Home() {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
+  let user: User | null = null
   let role: string | null = null
   let displayName: string | null = null
-  if (user) {
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('role, full_name')
-      .eq('id', user.id)
-      .maybeSingle()
-    role = profile?.role ?? 'customer'
-    displayName = profile?.full_name?.trim() || user.email?.split('@')[0] || 'there'
+
+  if (isSupabaseConfigured()) {
+    const supabase = await createClient()
+    const {
+      data: { user: u },
+    } = await supabase.auth.getUser()
+    user = u
+    if (user) {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('role, full_name')
+        .eq('id', user.id)
+        .maybeSingle()
+      role = profile?.role ?? 'customer'
+      displayName = profile?.full_name?.trim() || user.email?.split('@')[0] || 'there'
+    }
   }
 
   const staffRole = role === 'agent' || role === 'admin'

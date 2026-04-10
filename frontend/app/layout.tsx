@@ -2,29 +2,20 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
+/** Relative import — bundled URL; replaces missing /icon-*.png and /apple-icon.png in public/. */
+import appIcon from '../public/icon.svg'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+
+const iconUrl = typeof appIcon === 'object' && appIcon !== null && 'src' in appIcon ? appIcon.src : String(appIcon)
 
 export const metadata: Metadata = {
   title: 'RelayPay Customer Service',
   description: 'Professional customer service and CRM platform with voice support',
   generator: 'v0.app',
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: [{ url: iconUrl, type: 'image/svg+xml' }],
+    apple: iconUrl,
   },
 }
 
