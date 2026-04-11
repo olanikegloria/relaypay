@@ -179,7 +179,9 @@ export default function DashboardPage() {
       {role === 'admin' && (
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <Card className="border-border">
-            <CardHeader><CardTitle>Session and answer trend</CardTitle></CardHeader>
+            <CardHeader>
+              <CardTitle>Session and answer trend</CardTitle>
+            </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={chartData}>
@@ -196,7 +198,9 @@ export default function DashboardPage() {
           </Card>
 
           <Card className="border-border">
-            <CardHeader><CardTitle>Answer rate (daily)</CardTitle></CardHeader>
+            <CardHeader>
+              <CardTitle>Answer rate (daily)</CardTitle>
+            </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart data={chartData}>

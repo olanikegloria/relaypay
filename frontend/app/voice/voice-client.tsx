@@ -9,6 +9,7 @@ import { BrandLogo } from '@/components/brand-logo'
 import { Send, MessageSquare, ArrowLeft, Phone, PhoneOff, User } from 'lucide-react'
 import { toErrorMessage } from '@/lib/error-message'
 import { isBenignVoiceSdkMessage } from '@/lib/voice-sdk-errors'
+import { useConnectingRing } from '@/lib/voice-connecting-ring'
 
 export type VoiceAccountPrefill = { displayName: string; email: string }
 
@@ -117,6 +118,8 @@ export function VoiceClient({ accountPrefill }: Props) {
     }, 1000)
     return () => window.clearInterval(id)
   }, [callStartedAt])
+
+  useConnectingRing(connecting)
 
   const getPublicKey = () =>
     typeof process !== 'undefined' ? process.env.NEXT_PUBLIC_VAPI_PUBLIC_KEY?.trim() ?? '' : ''
